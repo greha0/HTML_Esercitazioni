@@ -1,0 +1,26 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="css/style.css">
+    </head>
+    <body>
+        <div class="titolo">
+            Esercitazioni - Greta Brugnatti
+        </div>
+        <div class="cont"> 
+            <div class="cont-elenco">
+                <div class="argomento" onclick="cambiaLink('esercitazioni/HTML_Tris/index.html')"> Tris </div>
+                <div class="argomento" onclick="cambiaLink('esercitazioni/HTML_Drums/index.html')"> Batteria </div>
+            </div>
+
+            <div class="cont-iframe">
+                <iframe src="" id="iframeID"> </iframe>
+            </div>
+        </div>
+    </body>
+    <script>
+        function cambiaLink(link){
+            document.getElementById("iframeID").style.display = "block";
+            document.getElementById("iframeID").src = link;
+        }
+    </script>
+</html>
