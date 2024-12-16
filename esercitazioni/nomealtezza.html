@@ -1,0 +1,205 @@
+<html>
+    <head>
+        <style>
+            body{
+                background-color: #CCD5AE;
+                font-family: impact ;
+            }
+
+            #testo{
+                z-index: 1;
+                margin: 3%;
+            }
+
+            form{
+                border: 3px solid #D4A373;
+                border-left: 3px solid rgb(90, 39, 39);
+                border-bottom: 3px solid rgb(119, 50, 50);
+                width: fit-content;
+                padding: 2%;
+                margin: 0 auto;
+                background-color: #FEFAE0;
+                display: flex;
+                justify-content: center;
+                flex-direction: column;
+                position: relative;
+                top: 30%;
+                border-radius: 20px;
+                
+            }
+
+            input{
+                border-radius: 20px;
+                border: 3px solid #D4A373;
+                border-left: 3px solid rgb(90, 39, 39);
+                border-bottom: 3px solid rgb(119, 50, 50);
+                margin: 1%;
+            }
+
+            label{
+                font-size: 150%;
+            }
+
+            #nome{
+                width: 90%;
+        
+            }
+
+            #altezza{
+                width:30%;
+                margin-bottom: 10%;
+       
+            }
+
+            #myDiv{
+                position: relative;
+                border: 1px solid black;
+                visibility:hidden;
+                margin: 0 auto;
+                bottom: 30%;
+                border-radius: 20px;
+                border: 3px solid #D4A373;
+                border-left: 3px solid rgb(90, 39, 39);
+                border-bottom: 3px solid rgb(119, 50, 50);
+            }
+
+            #title{
+                background-color: #FEFAE0;
+                padding: 1%;
+                border: 3px solid #D4A373;
+                border-radius: 20px;
+                border-left: 3px solid rgb(90, 39, 39);
+                border-bottom: 3px solid rgb(119, 50, 50);
+            }
+
+        
+
+            #close{
+                border-radius: 20px;
+                border-left: 3px solid rgb(90, 39, 39);
+                border-bottom: 3px solid rgb(119, 50, 50);
+                background-color:#FAEDCD;
+                text-align: right;
+            }
+            
+            .x{
+                margin: 1%;
+            }
+
+        </style>
+        <title>Esercitazione HTML, JS, CSS</title>
+    </head>
+    <body>
+        <div id="title"> Esercitazione HTML, JS, CSS </div>
+        <form>
+            <label> Nome: </label>
+            <input type="text" id="nome">
+            <br>
+            <label> Altezza: </label>
+            <input type="number" id="altezza">
+            <br>
+            <input type="button" value="Invia" onclick="salvaDati()">
+            <input type="button" value="Stampa" onclick="stampaDati()">
+            
+        </form>
+
+        <div class="myDiv" id = "myDiv">
+            <div id="close" onclick="chiudiModale()"> <span class="x"> x </span> </div>
+            <p id="testo"> </p>
+        </div>
+    </body>
+    <script>
+        var arrayNomi = [];
+        var arrayAltezze = [];
+        var cont = 0;
+        
+
+        function salvaDati(){
+            var altezza = document.getElementById("altezza").value;
+            var nome = document.getElementById("nome").value;
+
+            if(altezza == NaN || nome == NaN || altezza == "" || nome == ""){
+                alert("Compilare i campi");
+                return;
+            }
+
+            arrayNomi[cont] = nome;
+            arrayAltezze[cont] =  altezza;
+
+            cont++; 
+        }
+
+        function stampaDati(){
+            var i = 0;
+            var stringa = " ";
+            var hMax = 0;
+            var somma = 0;
+            var media = 0;
+            
+            for(i=0; i<cont; i++){
+
+                stringa = stringa + "\n" + arrayNomi[i] + ":" + arrayAltezze[i];
+            }
+
+            document.getElementById("testo").innerText = stringa;
+
+            
+
+            for (i = 0; i < cont; i++) {
+        
+                if (i == 0){
+                hMax = arrayAltezze[i];
+                }
+
+                if (arrayAltezze[i] > hMax){
+                hMax = arrayAltezze[i];
+                }
+            }
+
+            document.getElementById("myDiv").style.height = hMax + "px";
+            document.getElementById("myDiv").style.width = hMax + "px";
+
+            media = calcolaMedia();
+
+
+            if(media < 165){
+                document.getElementById("myDiv").style.backgroundColor = "red";
+            }
+
+            if((media >= 165) && (media <= 175)){
+                document.getElementById("myDiv").style.backgroundColor = "#20A949";
+            }
+
+            if(media > 175){
+                document.getElementById("myDiv").style.backgroundColor = "rgb(109, 160, 175)";
+            }
+
+            document.getElementById("myDiv").style.visibility = "visible";
+
+        }
+
+        function calcolaMedia(){
+            var media = 0;
+            var somma = 0;
+
+            somma = parseFloat(somma);
+            media = parseFloat(media);
+
+            for (var i = 0; i < cont; i++) {
+        
+                arrayAltezze[i] = parseFloat(arrayAltezze[i]);
+                somma = somma + arrayAltezze[i];
+
+            }
+
+
+            media = somma / cont;
+
+            return media;
+        }
+
+        function chiudiModale(){
+            document.getElementById("myDiv").style.visibility = "hidden";
+        }
+    </script>
+</html>
